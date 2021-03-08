@@ -1,7 +1,4 @@
-package com.yahh;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.yahh.bPlusdis.tree;
 
 /**
  * @author 邹磊
@@ -70,9 +67,7 @@ public class BPlusTree <T extends Comparable<T>,V> {
     }
 
     /**
-     * the abstract node definition, define the operation of leaf node and internal node.
-     *
-     * @author bo.fangbo
+     * 节点抽象定义
      *
      * @param <T>
      * @param <V>
@@ -100,10 +95,8 @@ public class BPlusTree <T extends Comparable<T>,V> {
     }
 
     /**
-     * the internal node which manages the pointers.
      *
-     * @author bo.fangbo
-     *
+     * 非叶子结点
      * @param <T>
      * @param <V>
      */
@@ -118,6 +111,7 @@ public class BPlusTree <T extends Comparable<T>,V> {
 
         @Override
         public Node<T, V> insert(T key, V value) {
+            // 插入时首先顺序遍历所有的key 找到正确的位置
             int i = 0;
             for (; i < this.size; i++) {
                 if ( key.compareTo( (T)this.keys[i] ) < 0 ) {
@@ -148,6 +142,7 @@ public class BPlusTree <T extends Comparable<T>,V> {
          * @return
          */
         private Node<T, V> insert(T key, Node<T, V> leftChild, Node<T, V> rightChild){
+            // size==0说明是一个初始化的节点
             if (this.size == 0) {
                 this.size++;
                 this.pointers[0] = leftChild;
@@ -216,10 +211,8 @@ public class BPlusTree <T extends Comparable<T>,V> {
     }
 
     /**
-     * leaf node, store the keys and actual values.
      *
-     * @author bo.fangbo
-     *
+     * 叶子节点
      * @param <T>
      * @param <V>
      */
@@ -332,34 +325,5 @@ public class BPlusTree <T extends Comparable<T>,V> {
     }
 
 
-    public static void main(String[] args) {
-//        BPlusTree<Integer, String> myTree = new BPlusTree<Integer, String>(8);
-//
-//        int max = 1000000;
-//        long start = System.currentTimeMillis();
-//        for(int i = 0; i < max; i++) {
-//            myTree.set(i, String.valueOf(i));
-//        }
-//        System.out.println("time cost with BPlusTree: " + (System.currentTimeMillis() - start));
-//        System.out.println("Data has been inserted into tree");
-//
-//        System.out.println("height: " + myTree.height());
-//
-//        start = System.currentTimeMillis();
-//        Map<Integer, String> hashMap = new HashMap<Integer, String>();
-//        for (int i = 0; i < max; i++) {
-//            hashMap.put(i, String.valueOf(i));
-//        }
-//        System.out.println("time cost with HashMap: " + (System.currentTimeMillis() - start));
-//
-//        for (int i = 0; i < max; i++) {
-//            if (!String.valueOf(i).equals(myTree.get(i))) {
-//                System.err.println("error for: " + i);
-//            }
-//        }
 
-//        System.out.println("Success");
-
-        System.out.println(Double.valueOf(Math.ceil(1.0 * 5 / 2)).intValue());
-    }
 }
